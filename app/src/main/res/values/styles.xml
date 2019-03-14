@@ -17,11 +17,16 @@
         <item name="android:actionMenuTextColor">@color/colorPrimary</item>
         <item name="actionMenuTextColor">@color/colorPrimary</item>
         <item name="android:actionBarWidgetTheme">@color/colorPrimaryDark</item>
-        <item name="android:colorBackground">@color/colorPrimary</item>
+        <item name="android:colorBackground">@android:color/darker_gray</item>
         <item name="windowActionBar">false</item>
         <item name="colorControlNormal">@color/colorAccent</item>
         <item name="colorControlActivated">@color/colorAccent</item>
         <item name="colorControlHighlight">@color/colorAccent</item>
+    </style>
+
+    <style name="SetToolbarStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="titleTextColor">@android:color/white</item>
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
 </resources>

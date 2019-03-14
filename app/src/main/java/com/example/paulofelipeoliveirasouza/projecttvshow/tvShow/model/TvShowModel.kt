@@ -13,10 +13,8 @@ class TvShowModel : TvShowModelInter{
 
     private var reference: WeakReference<TvShowPresenterInter>? = null
 
-
     private val tvShowPresenterInter: TvShowPresenterInter?
         get() = reference?.get()
-
 
     companion object {
         @JvmStatic

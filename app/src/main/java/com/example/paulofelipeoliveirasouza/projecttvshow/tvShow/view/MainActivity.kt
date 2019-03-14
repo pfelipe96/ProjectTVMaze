@@ -30,12 +30,6 @@ class MainActivity : AppCompatActivity(), TvShowViewInter, SearchView.OnQueryTex
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initializeInstances()
-        initializeToolBar()
-    }
-
-    private fun initializeToolBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -68,6 +62,9 @@ class MainActivity : AppCompatActivity(), TvShowViewInter, SearchView.OnQueryTex
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
+        recycler_view.visibility = View.GONE
+        progress_bar.visibility = View.VISIBLE
+
         query?.let {
             TvShowPresenter.getInstance().getApiTvSMaze(it)
         }
@@ -91,11 +88,12 @@ class MainActivity : AppCompatActivity(), TvShowViewInter, SearchView.OnQueryTex
     }
 
     override fun loadData(it: ArrayList<Shows>) {
-        runOnUiThread {
-            if (arrayListShow.isNotEmpty()) {
-                arrayListShow.clear()
-            }
+        if (arrayListShow.isNotEmpty()) {
+            arrayListShow.clear()
+        }
 
+        runOnUiThread {
+            progress_bar.visibility = View.GONE
             val linearLayoutManager = LinearLayoutManager(this)
             linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
 
@@ -107,6 +105,8 @@ class MainActivity : AppCompatActivity(), TvShowViewInter, SearchView.OnQueryTex
             }
 
             recyclerViewAdapter.setData(it)
+
+            progress_bar.visibility = View.GONE
         }
     }
 

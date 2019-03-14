@@ -12,37 +12,41 @@ import com.example.paulofelipeoliveirasouza.projecttvshow.data.Show
 import com.example.paulofelipeoliveirasouza.projecttvshow.tvShow.view.DetailTvShow
 import kotlin.text.StringBuilder
 
-class CardViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     val imageView = itemView.findViewById<ImageView>(R.id.image_show_tv)
     val titleView = itemView.findViewById<TextView>(R.id.title)
     val genresView = itemView.findViewById<TextView>(R.id.list_genres)
     val cardView = itemView.findViewById<CardView>(R.id.card_view_show_tv)
 
-    fun bind(objectValue: Show?){
-        Glide.with(imageView.context)
+    fun bind(objectValue: Show?) {
+        Glide
+                .with(imageView.context)
                 .load(objectValue?.image?.medium)
                 .into(imageView)
+
 
         titleView.text = objectValue?.title
         genresView.text = createAppendListForGenres(objectValue?.genres)
 
-        cardView.setOnClickListener{
+        cardView.setOnClickListener {
             val intent = Intent(it.context, DetailTvShow::class.java)
 
             intent.putExtra("title", objectValue?.title)
-            intent.putExtra("date", objectValue?.date)
-            intent.putExtra("genres_list", objectValue?.genres)
+            intent.putExtra("date", objectValue?.date?.toGMTString())
+            intent.putExtra("genres_list", createAppendListForGenres(objectValue?.genres))
             intent.putExtra("description", objectValue?.summary)
             intent.putExtra("image", objectValue?.image?.original)
+
+            it.context.startActivity(intent)
         }
     }
 
-    private fun createAppendListForGenres(arrayList: ArrayList<String>?) : String{
+    private fun createAppendListForGenres(arrayList: ArrayList<String>?): String {
         val append = StringBuilder()
 
-        arrayList?.forEachIndexed {index, it ->
-            if(index != arrayList.size - 1)
+        arrayList?.forEachIndexed { index, it ->
+            if (index != arrayList.size - 1)
                 append.append(" $it * ")
             else
                 append.append(" $it")

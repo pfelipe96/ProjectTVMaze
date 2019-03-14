@@ -34,7 +34,6 @@ class TvShowPresenter : TvShowPresenterInter {
         }
     }
 
-
     override fun getApiTvSMaze(it: String) {
         TvShowModel.getInstance().getApiTvSMaze(it)
     }

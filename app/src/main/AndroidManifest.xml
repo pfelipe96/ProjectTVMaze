@@ -34,6 +34,7 @@
             android:label="Detalhe de Serie"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeWithoutBar" />
+
     </application>
 
 </manifest>
